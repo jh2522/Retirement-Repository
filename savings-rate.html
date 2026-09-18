@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Required Retirement Savings Rate</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <main class="container">
+    <nav class="tool-nav" aria-label="Retirement tools">
+      <a href="index.html">Project my retirement</a>
+      <a class="active" href="savings-rate.html">Find my savings rate</a>
+    </nav>
+
+    <header>
+      <p class="eyebrow">SAVINGS RATE CALCULATOR</p>
+      <h1>How much of your income should you save?</h1>
+      <p class="subtitle">Explore how your savings, income, retirement goals, and assumptions translate into the percentage of salary you may need to save.</p>
+    </header>
+
+    <section class="card inputs">
+      <h2>Your information</h2>
+      <div class="grid">
+        <label>Current age<input id="currentAge" type="number" min="18" max="100" value="25"></label>
+        <label>Retirement age<input id="retirementAge" type="number" min="19" max="100" value="65"></label>
+        <label>Plan until age<input id="lifeExpectancy" type="number" min="20" max="120" value="100"></label>
+        <label class="unit-field money">Current retirement savings<input id="currentSavings" type="number" min="0" step="1000" value="50000"></label>
+        <label class="unit-field money">Current annual salary<input id="startingSalary" type="number" min="0" step="1000" value="100000"></label>
+        <label class="unit-field money">Desired balance at that age<input id="desiredEndingBalance" type="number" min="0" step="10000" value="0"></label>
+      </div>
+
+      <h2>Assumptions</h2>
+      <div class="grid">
+        <div class="field"><div class="field-label"><label for="salaryGrowth">Annual salary growth</label></div><div class="input-shell percent"><input id="salaryGrowth" type="number" min="-20" max="50" step="0.1" value="4"></div><small>Your expected average annual raise.</small></div>
+        <div class="field"><div class="field-label"><label for="workingReturn">Investment return while working</label></div><div class="input-shell percent"><input id="workingReturn" type="number" min="-100" max="100" step="0.1" value="8"></div><small>Try several assumptions, such as 6%, 8%, and 10%.</small></div>
+        <div class="field"><div class="field-label"><label for="retirementReturn">Investment return in retirement</label></div><div class="input-shell percent"><input id="retirementReturn" type="number" min="-100" max="100" step="0.1" value="6"></div><small>Expected returns may be lower with less risky investments.</small></div>
+        <div class="field"><div class="field-label"><label for="inflation">Inflation</label></div><div class="input-shell percent"><input id="inflation" type="number" min="-20" max="50" step="0.1" value="3"></div><small>How much prices and living costs may increase each year. Long-term U.S. inflation has averaged about 3%.</small></div>
+        <div class="field"><div class="field-label"><label for="retirementSpending">Annual retirement spending</label></div><div class="input-shell money"><input id="retirementSpending" type="number" min="0" step="1000" value="75000"></div><small>How much you expect to spend each year, in today's dollars.</small></div>
+        <div class="field"><div class="field-label"><label for="passiveIncome">Passive income at retirement</label></div><div class="input-shell money"><input id="passiveIncome" type="number" min="0" step="1000" value="20000"></div><small>For example, Social Security, a pension, or investment-property income.</small></div>
+      </div>
+
+      <button id="calculateRate">Find my savings rate</button>
+      <p id="error" class="error" hidden></p>
+    </section>
+
+    <section id="results" hidden>
+      <div class="solver-result">
+        <p class="eyebrow">ESTIMATED MINIMUM SAVINGS RATE</p>
+        <strong class="result-number" id="requiredRate"></strong>
+        <p id="resultExplanation"></p>
+        <div id="solverStatus" class="solver-status" hidden></div>
+      </div>
+
+      <div class="metrics">
+        <div class="metric"><span>Monthly savings needed</span><strong id="monthlySavings"></strong></div>
+        <div class="metric"><span>Projected at retirement</span><strong id="solverRetirementBalance"></strong></div>
+        <div class="metric"><span>First-year retirement spending</span><strong id="solverFirstYearSpending"></strong></div>
+        <div class="metric"><span id="earlierRetirementLabel">To retire three years earlier</span><strong id="earlierRetirementRate"></strong></div>
+      </div>
+
+      <section class="card chart-card">
+        <h2>Portfolio Projection at the Calculated Rate</h2>
+        <div class="chart-wrap"><canvas id="savingsChart"></canvas></div>
+      </section>
+
+      <section class="card table-card">
+        <h2>Year-by-year projection</h2>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Age</th><th>Phase</th><th>Annual income</th><th>Saved / spent</th><th>Starting portfolio</th></tr></thead>
+            <tbody id="savingsProjectionTable"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="notes"><strong>Important:</strong> This is an educational projection, not a guarantee or individualized financial advice. Small changes in returns, inflation, or spending can materially change the calculated savings rate.</section>
+
+      <details class="methodology bottom-methodology">
+        <summary>What result is the calculator targeting?</summary>
+        <div class="methodology-content">
+          <p>It finds the estimated minimum savings rate needed to reach your desired portfolio balance at the start of the final age you selected. Contributions occur throughout each working year, and passive income begins at retirement and then grows with inflation.</p>
+          <p>The result is an illustration, not a recommended savings rate. Real returns, expenses, and life circumstances vary, so you may want to test a higher desired ending balance or more cautious assumptions.</p>
+        </div>
+      </details>
+    </section>
+  </main>
+  <script src="savings-rate.js"></script>
+</body>
+</html>

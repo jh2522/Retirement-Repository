@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Retirement Planner</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <main class="container">
+    <nav class="tool-nav" aria-label="Retirement tools">
+      <a class="active" href="index.html">Project my retirement</a>
+      <a href="savings-rate.html">Find my savings rate</a>
+    </nav>
+    <header>
+      <p class="eyebrow">RETIREMENT PLANNER</p>
+      <h1>Will your money last through retirement?</h1>
+      <p class="subtitle">Explore how your savings, contributions, retirement spending, and assumptions could shape your financial future.</p>
+    </header>
+
+    <section class="card inputs">
+      <h2>Your information</h2>
+      <div class="grid">
+        <label>Current age<input id="currentAge" type="number" min="18" max="100" value="25"></label>
+        <label>Retirement age<input id="retirementAge" type="number" min="19" max="100" value="65"></label>
+        <label>Plan until age<input id="lifeExpectancy" type="number" min="20" max="120" value="100"></label>
+        <label class="unit-field money">Current retirement savings<input id="currentSavings" type="number" min="0" step="1000" value="50000"></label>
+        <label class="unit-field money">Current annual salary<input id="startingSalary" type="number" min="0" step="1000" value="100000"></label>
+        <label class="unit-field percent">Retirement savings rate<input id="savingsRate" type="number" min="0" max="100" step="0.5" value="15"></label>
+      </div>
+
+      <h2>Assumptions</h2>
+      <div class="grid">
+        <div class="field">
+          <div class="field-label"><label for="salaryGrowth">Annual salary growth</label><button class="info-button" type="button" aria-expanded="false" aria-controls="salaryGrowthTip" aria-label="About annual salary growth">?</button></div>
+          <div class="input-shell percent"><input id="salaryGrowth" type="number" min="-20" max="50" step="0.1" value="4"></div>
+          <small>Use your expected average annual raise.</small>
+          <div class="info-popover" id="salaryGrowthTip" hidden>Your salary is increased by this percentage after each working year. It affects future contributions when savings are entered as a percentage of salary.</div>
+        </div>
+        <div class="field">
+          <div class="field-label"><label for="workingReturn">Investment return while working</label><button class="info-button" type="button" aria-expanded="false" aria-controls="workingReturnTip" aria-label="About investment return while working">?</button></div>
+          <div class="input-shell percent"><input id="workingReturn" type="number" min="-100" max="100" step="0.1" value="8"></div>
+          <small>Try multiple assumptions, such as 6%, 8%, and 10%.</small>
+          <div class="info-popover" id="workingReturnTip" hidden>The calculator applies this constant average return each working year. Actual annual returns fluctuate and may be negative. Results also depend on investments, fees, and taxes; no assumed return is guaranteed.</div>
+        </div>
+        <div class="field">
+          <div class="field-label"><label for="retirementReturn">Investment return in retirement</label><button class="info-button" type="button" aria-expanded="false" aria-controls="retirementReturnTip" aria-label="About investment return in retirement">?</button></div>
+          <div class="input-shell percent"><input id="retirementReturn" type="number" min="-100" max="100" step="0.1" value="6"></div>
+          <small>People often choose less risky investments in retirement, so expected returns may be lower.</small>
+          <div class="info-popover" id="retirementReturnTip" hidden>Some people gradually move toward less risky investments as retirement approaches. That can reduce volatility, but it may also produce lower expected returns. The calculator applies your chosen constant return after each year's retirement withdrawal.</div>
+        </div>
+        <div class="field">
+          <div class="field-label"><label for="inflation">Inflation</label><button class="info-button" type="button" aria-expanded="false" aria-controls="inflationTip" aria-label="About inflation">?</button></div>
+          <div class="input-shell percent"><input id="inflation" type="number" min="-20" max="50" step="0.1" value="3"></div>
+          <small>How much you expect prices and living costs to increase each year. Long-term U.S. inflation has averaged about 3%.</small>
+          <div class="info-popover" id="inflationTip" hidden>Inflation means the same goods and services generally cost more over time. The calculator increases your retirement spending by this percentage before retirement and during each retirement year.</div>
+        </div>
+        <div class="field">
+          <div class="field-label"><label for="retirementSpending">Annual retirement spending</label><button class="info-button" type="button" aria-expanded="false" aria-controls="spendingTip" aria-label="About retirement spending">?</button></div>
+          <div class="input-shell money"><input id="retirementSpending" type="number" min="0" step="1000" value="75000"></div>
+          <small>How much you think you will spend each year in retirement, in today's dollars.</small>
+          <div class="info-popover" id="spendingTip" hidden>Enter the annual lifestyle cost you want in today's purchasing power. The calculator automatically increases it for inflation before and throughout retirement.</div>
+        </div>
+        <div class="field">
+          <div class="field-label"><label for="passiveIncome">Annual passive income</label><button class="info-button" type="button" aria-expanded="false" aria-controls="passiveIncomeTip" aria-label="About passive income">?</button></div>
+          <div class="input-shell money"><input id="passiveIncome" type="number" min="0" step="1000" value="20000"></div>
+          <small>Income such as Social Security, a pension, or investment-property income.</small>
+          <div class="info-popover" id="passiveIncomeTip" hidden>This income reduces the amount that must be withdrawn from your retirement portfolio. It could include Social Security, pension payments, annuity income, or net income from investment properties. The entered amount begins in the first retirement year and then increases annually with inflation.</div>
+        </div>
+      </div>
+
+    <button id="calculate">Calculate my retirement</button>
+      <p id="error" class="error" hidden></p>
+    </section>
+
+    <section id="results" hidden>
+      <div class="headline-result">
+        <p class="eyebrow">YOUR PROJECTION</p>
+        <h2 id="headline"></h2>
+        <p id="headlineText"></p>
+      </div>
+
+      <div class="metrics">
+        <div class="metric"><span>At retirement</span><strong id="retirementBalance"></strong></div>
+        <div class="metric"><span>First-year spending</span><strong id="firstYearSpending"></strong></div>
+        <div class="metric"><span>Earliest sustainable retirement</span><strong id="earliestRetirementAge"></strong></div>
+        <div class="metric"><span>Money runs out</span><strong id="runsOutAge"></strong></div>
+      </div>
+
+      <section class="card chart-card">
+        <h2>Portfolio Projection</h2>
+        <div class="chart-wrap"><canvas id="portfolioChart"></canvas></div>
+      </section>
+
+      <section class="card table-card">
+        <h2>Year-by-year projection</h2>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Age</th><th>Phase</th><th>Annual income</th><th>Saved / spent</th><th>Starting portfolio</th></tr></thead>
+            <tbody id="projectionTable"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="notes">
+        <strong>Important:</strong> This is an educational projection, not a guarantee or individualized financial advice. Investment returns vary from year to year, and actual retirement outcomes can differ substantially from any projection.
+      </section>
+
+      <details class="methodology bottom-methodology">
+        <summary>What result is the calculator showing?</summary>
+        <div class="methodology-content">
+          <p>The calculator projects how your portfolio may change from your current age through the final age you selected, based on the assumptions entered above.</p>
+          <p><strong>Start-of-year values:</strong> Each age displays the portfolio balance at the beginning of that year. Activity during that year appears in the following age's balance.</p>
+          <p><strong>Working years:</strong> Existing savings receive the full assumed annual return. Contributions are treated as occurring throughout the year and receive approximately half a year of growth.</p>
+          <p><strong>Retirement years:</strong> Passive income begins at the amount entered and then grows with inflation each year. It reduces the amount withdrawn for spending, and the remaining portfolio receives the assumed retirement return.</p>
+          <p><strong>Important limitation:</strong> The calculator uses constant average returns. Actual returns vary from year to year, and the order of gains and losses can significantly affect retirement outcomes.</p>
+        </div>
+      </details>
+    </section>
+  </main>
+  <script src="calculator.js"></script>
+</body>
+</html>
