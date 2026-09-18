@@ -55,22 +55,43 @@ button:hover { background: #085e59; transform: translateY(-1px); }
 .chart-note { margin: 0 0 18px; color: #647783; font-size: .88rem; }
 .chart-wrap { position: relative; height: 410px; }
 .table-card { margin-bottom: 18px; }
-.table-scroll { overflow-x: auto; }
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 table { width: 100%; border-collapse: collapse; font-size: .88rem; }
 th, td { text-align: right; padding: 10px 8px; border-bottom: 1px solid #e6efee; white-space: nowrap; }
 th { color: #24546a; background: #f1f7f6; }
 th:first-child, td:first-child, th:nth-child(2), td:nth-child(2) { text-align: left; }
+.table-scroll th:first-child,
+.table-scroll td:first-child { position: sticky; left: 0; z-index: 2; background: #fff; box-shadow: 1px 0 0 #d7e5e3; }
+.table-scroll thead th:first-child { z-index: 4; background: #f1f7f6; }
 .retirement-start td { border-top: 3px solid #d79a2b; background: #fffaf0; }
+.retirement-start td:first-child { background: #fffaf0; }
+.retirement-labels th { border-top: 3px solid #d79a2b; border-bottom: 1px solid #efd9a8; background: #fff5dc; color: #79530f; }
+.retirement-labels th:first-child { z-index: 3; background: #fff5dc; }
 .notes { color: #687582; font-size: .82rem; line-height: 1.6; padding: 10px 2px; }
 .bottom-methodology { margin-top: 16px; }
+.about-intro, .about-section { margin-bottom: 18px; }
+.about-lead { margin-top: 0; color: #23475a; font-size: 1.15rem; line-height: 1.65; }
+.about-intro p:last-child, .about-section p:last-child { margin-bottom: 0; }
+.about-intro p, .about-section p, .about-card p { color: #526979; line-height: 1.65; }
+.about-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-bottom: 18px; }
+.about-card { border-top: 4px solid #0d9488; }
+.about-card:nth-child(2) { border-top-color: #1d5f91; }
+.about-card h2 { margin-bottom: 8px; }
+.text-link, .about-links a { color: #0b6f69; font-weight: 750; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.about-columns { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.about-columns h3 { margin: 0 0 7px; color: #24546a; font-size: 1rem; }
+.about-columns p { margin: 0; font-size: .9rem; }
+.about-links { margin-top: 22px; padding-top: 18px; border-top: 1px solid #e1ecea; font-size: .9rem; }
+.limitations { border-left: 4px solid #d79a2b; }
 @media (max-width: 800px) {
   .grid { grid-template-columns: repeat(2, 1fr); }
   .metrics { grid-template-columns: repeat(2, 1fr); }
+  .about-columns { grid-template-columns: 1fr; gap: 14px; }
 }
 @media (max-width: 520px) {
   .container { width: min(100% - 20px, 1050px); padding-top: 28px; }
   .card { padding: 18px; }
-  .grid, .metrics { grid-template-columns: 1fr; }
+  .grid, .metrics, .about-grid { grid-template-columns: 1fr; }
   button { width: 100%; }
   .chart-wrap { height: 320px; }
   .tool-nav { align-items: stretch; gap: 6px; }

@@ -24,7 +24,7 @@ function readInputs() {
 
 function validate(x) {
   if (x.retirementAge <= x.currentAge) return "Retirement age must be greater than current age.";
-  if (x.lifeExpectancy < x.retirementAge) return "Plan-until age must be at least your retirement age.";
+  if (x.lifeExpectancy < x.retirementAge) return "Life Expectancy must be at least your retirement age.";
   if (x.currentAge < 18 || x.lifeExpectancy > 120) return "Please enter a reasonable age range.";
   if (Object.values(x).some(v => !Number.isFinite(v))) return "Please enter a value in every field.";
   return "";
@@ -87,8 +87,10 @@ function calculateRetirement(x) {
     });
 
     const nextPortfolio = (portfolio - withdrawal) * (1 + x.retirementReturn);
+    // A year only counts as depleted when its displayed start-of-age
+    // balance is already $0. Depletion during the Life Expectancy year
+    // therefore does not count as running out within the plan.
     if (runsOutAge === null && portfolio <= 0) runsOutAge = age;
-    if (runsOutAge === null && portfolio > 0 && nextPortfolio <= 0) runsOutAge = age;
     portfolio = Math.max(0, nextPortfolio);
     spending *= (1 + x.inflation);
     passiveIncome *= (1 + x.inflation);
@@ -220,7 +222,11 @@ function render(result, x) {
     const rowClass = r.phase === "Retirement" && r.age === x.retirementAge
       ? "retirement-start"
       : "";
-    return `
+    const retirementLabels = rowClass ? `
+    <tr class="retirement-labels">
+      <th>Age</th><th>Phase</th><th>Passive income</th><th>Spent each year</th><th>Starting portfolio</th>
+    </tr>` : "";
+    return `${retirementLabels}
     <tr class="${rowClass}">
       <td>${r.age}</td>
       <td>${r.phase}</td>

@@ -12,12 +12,13 @@
     <nav class="tool-nav" aria-label="Retirement tools">
       <a href="index.html">Project my retirement</a>
       <a class="active" href="savings-rate.html">Find my savings rate</a>
+      <a href="about.html">About</a>
     </nav>
 
     <header>
       <p class="eyebrow">SAVINGS RATE CALCULATOR</p>
       <h1>How much of your income should you save?</h1>
-      <p class="subtitle">Explore how your savings, income, retirement goals, and assumptions translate into the percentage of salary you may need to save.</p>
+      <p class="subtitle">Calculate how much of your income you may need to save to support the life you want during retirement.</p>
     </header>
 
     <section class="card inputs">
@@ -25,10 +26,10 @@
       <div class="grid">
         <label>Current age<input id="currentAge" type="number" min="18" max="100" value="25"></label>
         <label>Retirement age<input id="retirementAge" type="number" min="19" max="100" value="65"></label>
-        <label>Plan until age<input id="lifeExpectancy" type="number" min="20" max="120" value="100"></label>
+        <label>Life Expectancy<input id="lifeExpectancy" type="number" min="20" max="120" value="100"></label>
         <label class="unit-field money">Current retirement savings<input id="currentSavings" type="number" min="0" step="1000" value="50000"></label>
         <label class="unit-field money">Current annual salary<input id="startingSalary" type="number" min="0" step="1000" value="100000"></label>
-        <label class="unit-field money">Desired balance at that age<input id="desiredEndingBalance" type="number" min="0" step="10000" value="0"></label>
+        <label class="unit-field money">Desired balance at Life Expectancy<input id="desiredEndingBalance" type="number" min="0" step="10000" value="0"></label>
       </div>
 
       <h2>Assumptions</h2>
@@ -69,7 +70,7 @@
         <h2>Year-by-year projection</h2>
         <div class="table-scroll">
           <table>
-            <thead><tr><th>Age</th><th>Phase</th><th>Annual income</th><th>Saved / spent</th><th>Starting portfolio</th></tr></thead>
+            <thead><tr><th>Age</th><th>Phase</th><th>Annual salary</th><th>Saved</th><th>Starting portfolio</th></tr></thead>
             <tbody id="savingsProjectionTable"></tbody>
           </table>
         </div>
@@ -77,10 +78,10 @@
 
       <section class="notes"><strong>Important:</strong> This is an educational projection, not a guarantee or individualized financial advice. Small changes in returns, inflation, or spending can materially change the calculated savings rate.</section>
 
-      <details class="methodology bottom-methodology">
+      <details class="methodology bottom-methodology" id="methodology">
         <summary>What result is the calculator targeting?</summary>
         <div class="methodology-content">
-          <p>It finds the estimated minimum savings rate needed to reach your desired portfolio balance at the start of the final age you selected. Contributions occur throughout each working year, and passive income begins at retirement and then grows with inflation.</p>
+          <p>It finds the estimated minimum savings rate needed to reach your desired portfolio balance at the start of your Life Expectancy age. Contributions occur throughout each working year, and passive income begins at retirement and then grows with inflation.</p>
           <p>The result is an illustration, not a recommended savings rate. Real returns, expenses, and life circumstances vary, so you may want to test a higher desired ending balance or more cautious assumptions.</p>
         </div>
       </details>
