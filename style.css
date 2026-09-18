@@ -71,6 +71,7 @@ th:first-child, td:first-child, th:nth-child(2), td:nth-child(2) { text-align: l
 .bottom-methodology { margin-top: 16px; }
 .about-intro, .about-section { margin-bottom: 18px; }
 .about-lead { margin-top: 0; color: #23475a; font-size: 1.15rem; line-height: 1.65; }
+.about-intro p { font-size: 1.15rem; }
 .about-intro p:last-child, .about-section p:last-child { margin-bottom: 0; }
 .about-intro p, .about-section p, .about-card p { color: #526979; line-height: 1.65; }
 .about-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-bottom: 18px; }
@@ -78,6 +79,7 @@ th:first-child, td:first-child, th:nth-child(2), td:nth-child(2) { text-align: l
 .about-card:nth-child(2) { border-top-color: #1d5f91; }
 .about-card h2 { margin-bottom: 8px; }
 .text-link, .about-links a { color: #0b6f69; font-weight: 750; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.feedback-link { display: inline-block; color: #0b6f69; font-weight: 750; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 .about-columns { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
 .about-columns h3 { margin: 0 0 7px; color: #24546a; font-size: 1rem; }
 .about-columns p { margin: 0; font-size: .9rem; }

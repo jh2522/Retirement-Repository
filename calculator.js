@@ -87,10 +87,12 @@ function calculateRetirement(x) {
     });
 
     const nextPortfolio = (portfolio - withdrawal) * (1 + x.retirementReturn);
-    // A year only counts as depleted when its displayed start-of-age
-    // balance is already $0. Depletion during the Life Expectancy year
-    // therefore does not count as running out within the plan.
-    if (runsOutAge === null && portfolio <= 0) runsOutAge = age;
+    // Report the age during which the portfolio is depleted. Depletion
+    // during the Life Expectancy year does not count as running out within
+    // the user's lifetime.
+    if (runsOutAge === null && nextPortfolio <= 0 && age < x.lifeExpectancy) {
+      runsOutAge = age;
+    }
     portfolio = Math.max(0, nextPortfolio);
     spending *= (1 + x.inflation);
     passiveIncome *= (1 + x.inflation);
