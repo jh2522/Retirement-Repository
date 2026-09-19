@@ -24,7 +24,7 @@ function readInputs() {
 
 function validate(x) {
   if (x.retirementAge <= x.currentAge) return "Retirement age must be greater than current age.";
-  if (x.lifeExpectancy < x.retirementAge) return "Life Expectancy must be at least your retirement age.";
+  if (x.lifeExpectancy < x.retirementAge) return "Life expectancy must be at least your retirement age.";
   if (x.currentAge < 18 || x.lifeExpectancy > 120) return "Please enter a reasonable age range.";
   if (x.startingSalary <= 0) return "Current annual salary must be greater than $0.";
   if (x.desiredEndingBalance < 0) return "Desired balance cannot be negative.";

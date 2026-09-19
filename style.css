@@ -87,6 +87,7 @@ th:first-child, td:first-child, th:nth-child(2), td:nth-child(2) { text-align: l
 .how-section h2 { margin-bottom: 10px; }
 .how-section p, .how-section li { color: #526979; line-height: 1.65; }
 .how-section ul { margin: 10px 0 0; padding-left: 22px; }
+.section-divider { margin: 26px 0 22px; border-top: 1px solid #d7e5e3; scroll-margin-top: 20px; }
 .formula-box { margin: 16px 0; padding: 16px 18px; border-left: 4px solid #0d9488; border-radius: 8px; background: #f3faf8; color: #23475a; font-weight: 650; line-height: 1.6; }
 .workbook-download { border-top: 4px solid #7c3aed; }
 .download-link { display: inline-block; margin-top: 4px; padding: 11px 15px; border-radius: 9px; background: #0b6f69; color: white; font-weight: 750; text-decoration: none; }

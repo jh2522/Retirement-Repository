@@ -24,7 +24,7 @@ function readInputs() {
 
 function validate(x) {
   if (x.retirementAge <= x.currentAge) return "Retirement age must be greater than current age.";
-  if (x.lifeExpectancy < x.retirementAge) return "Life Expectancy must be at least your retirement age.";
+  if (x.lifeExpectancy < x.retirementAge) return "Life expectancy must be at least your retirement age.";
   if (x.currentAge < 18 || x.lifeExpectancy > 120) return "Please enter a reasonable age range.";
   if (Object.values(x).some(v => !Number.isFinite(v))) return "Please enter a value in every field.";
   return "";
@@ -88,7 +88,7 @@ function calculateRetirement(x) {
 
     const nextPortfolio = (portfolio - withdrawal) * (1 + x.retirementReturn);
     // Report the age during which the portfolio is depleted. Depletion
-    // during the Life Expectancy year does not count as running out within
+    // during the life expectancy year does not count as running out within
     // the user's lifetime.
     if (runsOutAge === null && nextPortfolio <= 0 && age < x.lifeExpectancy) {
       runsOutAge = age;
