@@ -88,6 +88,10 @@ th:first-child, td:first-child, th:nth-child(2), td:nth-child(2) { text-align: l
 .how-section p, .how-section li { color: #526979; line-height: 1.65; }
 .how-section ul { margin: 10px 0 0; padding-left: 22px; }
 .formula-box { margin: 16px 0; padding: 16px 18px; border-left: 4px solid #0d9488; border-radius: 8px; background: #f3faf8; color: #23475a; font-weight: 650; line-height: 1.6; }
+.workbook-download { border-top: 4px solid #7c3aed; }
+.download-link { display: inline-block; margin-top: 4px; padding: 11px 15px; border-radius: 9px; background: #0b6f69; color: white; font-weight: 750; text-decoration: none; }
+.download-link:hover { background: #085e59; }
+.advice-section { border-left: 4px solid #0d9488; }
 .timing-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-bottom: 18px; }
 .timing-card { border-top: 4px solid #1d5f91; }
 .timing-card:nth-child(2) { border-top-color: #d79a2b; }

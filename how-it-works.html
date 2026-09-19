@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>How the Retirement Calculators Work</title>
+  <title>How It Works and Retirement Advice</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,67 +11,74 @@
     <nav class="tool-nav" aria-label="Retirement tools">
       <a href="index.html">Project my retirement</a>
       <a href="savings-rate.html">Find my savings rate</a>
-      <a class="active" href="how-it-works.html">How It Works</a>
+      <a class="active" href="how-it-works.html">How It Works / Advice</a>
       <a href="about.html">About</a>
     </nav>
 
     <header>
       <p class="eyebrow">BEHIND THE NUMBERS</p>
-      <h1>How the calculators work</h1>
-      <p class="subtitle">The calculations are designed to be understandable. Here is what happens to your money each year and what the results mean.</p>
+      <h1>How it works—and some practical advice</h1>
+      <p class="subtitle">A short explanation of the calculations, plus the ideas I use when thinking through retirement assumptions.</p>
     </header>
-
-    <section class="timing-grid" aria-label="Calculation timing">
-      <article class="card timing-card">
-        <h2>Balances use the start of each age</h2>
-        <p>The graph and table show how much is in the portfolio at the beginning of each age. This keeps retirement ages, Life Expectancy, and ending-balance targets on the same timeline.</p>
-      </article>
-      <article class="card timing-card">
-        <h2>One year is calculated at a time</h2>
-        <p>During working years, the calculator adds savings and growth. During retirement, it subtracts spending not covered by passive income and then applies investment growth.</p>
-      </article>
-    </section>
 
     <section class="card how-section" id="retirement-projection">
       <h2>Project My Retirement</h2>
       <p>This calculator follows the information you enter and projects your portfolio from your current age through your Life Expectancy.</p>
-
       <h3>During your working years</h3>
-      <p>Your annual contribution is your salary multiplied by your savings rate. Salary then grows by your annual salary-growth assumption.</p>
+      <p>Your annual contribution is your salary multiplied by your savings rate. Salary then grows by your annual salary-growth estimate.</p>
       <div class="formula-box">Next year's balance = current balance with a full year of growth + this year's contribution with approximately half a year of growth</div>
-      <p>The half-year of growth assumes that contributions are made gradually throughout the year rather than all on January 1 or December 31.</p>
-
+      <p>The half-year of growth assumes that contributions are made gradually throughout the year.</p>
       <h3>During retirement</h3>
-      <p>Retirement spending is entered in today's dollars. It is increased for inflation between your current age and retirement, then increased again during every retirement year.</p>
-      <p>Passive income starts at the amount you enter during your first retirement year. It then grows with inflation each year. Examples could include Social Security, a pension, or income from investment properties.</p>
+      <p>Retirement spending is entered in today's dollars. The calculator increases it for inflation before retirement and during each retirement year. Passive income starts at the amount entered and then grows with inflation.</p>
       <div class="formula-box">Next year's balance = (current balance − spending not covered by passive income) × retirement growth</div>
-      <p>If passive income is greater than spending, the calculator does not add the extra income to the portfolio. It simply treats the portfolio withdrawal as $0.</p>
-
-      <h3>Money Runs Out</h3>
-      <p>This result shows the age during which the portfolio is depleted. For example, if you begin age 85 with money but the calculation leaves $0 for age 86, the box reports <strong>Age 85</strong>. If depletion happens during the Life Expectancy year, the result says <strong>Does not run out</strong>.</p>
-
-      <h3>Earliest Sustainable Retirement</h3>
-      <p>The calculator tests earlier retirement ages using the same information. It reports the earliest age that does not run out of money before the Life Expectancy year. If the retirement age you entered already runs out too early, this result displays N/A.</p>
+      <p>If passive income is greater than spending, the withdrawal is $0; extra passive income is not added to the portfolio.</p>
     </section>
 
     <section class="card how-section" id="savings-rate">
       <h2>Find My Savings Rate</h2>
-      <p>This calculator works backward. Instead of asking you to enter a savings rate, it estimates the minimum percentage of salary needed to reach your desired balance at the start of your Life Expectancy age.</p>
-      <p>It repeatedly tests different savings rates until it finds one that lands very close to your selected ending balance. The resulting projection uses the same salary growth, contribution timing, inflation, passive-income, spending, and investment-return rules described above.</p>
-      <ul>
-        <li>If existing savings are already enough, the required rate is 0%.</li>
-        <li>If saving 100% of salary is not enough under the entered information, the result says more than 100%.</li>
-        <li>The retire-three-years-earlier result reruns the calculation with a retirement age three years younger.</li>
-      </ul>
+      <p>This calculator works backward. It tests different savings rates until it finds the estimated minimum percentage of salary needed to reach your desired balance at the start of your Life Expectancy age. It uses the same salary growth, contribution timing, inflation, spending, passive-income, and investment-return rules as the main calculator.</p>
+    </section>
+
+    <section class="card how-section workbook-download">
+      <p class="eyebrow">THE SPREADSHEET VERSION</p>
+      <h2>Download the Excel calculator</h2>
+      <p>If you prefer working directly in a spreadsheet, this is the updated Excel model behind the website. It includes the retirement calculations and the original notes that shaped the advice below.</p>
+      <a class="download-link" href="retirement-calculator.xlsx" download>Download the Excel calculator →</a>
+    </section>
+
+    <section class="card how-section advice-section">
+      <h2>Choosing reasonable assumptions</h2>
+      <p>No single set of assumptions will predict the future. I like to start with roughly 3% inflation, 8% investment growth while working, and lower growth in retirement—then rerun the calculator with both more cautious and more optimistic numbers.</p>
+      <p>Salary growth depends heavily on your field and career path. A steady annual raise is useful for planning, but moving into a higher-paying role can matter far more than a small change in the assumed investment return.</p>
+    </section>
+
+    <section class="card how-section advice-section">
+      <h2>Save consistently and collect the match</h2>
+      <p>A useful starting goal is saving at least 10% of income for retirement, including an employer match. If that is not realistic today, start where you can and increase it as your income grows.</p>
+      <p>My general order is: build an emergency fund, collect the full employer match, work toward a solid overall savings rate, fund an HSA when it fits your situation, and then add more to tax-advantaged or low-fee investment accounts.</p>
+    </section>
+
+    <section class="card how-section advice-section">
+      <h2>Plan for the life you actually want</h2>
+      <p>Life Expectancy and retirement spending are two of the hardest inputs. It is usually safer to test living longer than the average rather than planning only to the average age.</p>
+      <p>Spending can vary enormously. Someone with a paid-off home and modest plans may need much less than someone who wants to travel often and help family. Think about housing, healthcare, transportation, travel, and generosity—not just basic bills.</p>
+    </section>
+
+    <section class="card how-section advice-section">
+      <h2>Use the accounts available to you</h2>
+      <p>An HSA can be especially valuable for future healthcare costs. Contributions and growth can receive tax advantages, and withdrawals for qualified medical expenses can be tax-free under federal rules.</p>
+      <p>Traditional and Roth accounts tax money at different times. Traditional contributions can reduce taxable income now, while qualified Roth withdrawals can be tax-free later. Having some of each can give you more flexibility when managing taxes in retirement.</p>
+    </section>
+
+    <section class="card how-section advice-section">
+      <h2>Be careful with Social Security estimates</h2>
+      <p>Social Security rules and benefit levels can change over a long retirement-planning horizon. Instead of assuming either the full benefit or nothing at all, try the calculator with several passive-income amounts and see how much your plan depends on the benefit.</p>
     </section>
 
     <section class="card how-section limitations">
-      <h2>What the projection cannot predict</h2>
-      <p>The calculator uses the same average return every year. Real markets rise and fall, and poor returns near retirement can affect a portfolio differently from poor returns many years earlier.</p>
-      <p>The current model also does not account for taxes, investment fees, account-specific withdrawal rules, detailed Social Security rules, changing spending needs, or unexpected expenses. The results are useful for comparing scenarios, not predicting an exact future.</p>
+      <h2>Keep the result in perspective</h2>
+      <p>The calculator uses constant average returns and does not model taxes, fees, market swings, detailed Social Security rules, or every unexpected expense. Use it to compare choices and understand tradeoffs—not to predict an exact future.</p>
     </section>
-
-    <section class="notes"><strong>Remember:</strong> This calculator is an educational estimate based on the information you enter. Actual results will vary.</section>
   </main>
 </body>
 </html>
