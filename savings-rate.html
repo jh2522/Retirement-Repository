@@ -3,20 +3,30 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Required Retirement Savings Rate</title>
+  <title>Savings Rate Calculator | Wealthy Toolkit</title>
+  <meta name="description" content="Estimate the percentage of income you may need to save for the retirement lifestyle and ending balance you want.">
+  <meta name="theme-color" content="#0b6f69">
+  <link rel="canonical" href="https://wealthytoolkit.com/savings-rate.html">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="website"><meta property="og:site_name" content="Wealthy Toolkit">
+  <meta property="og:title" content="Savings Rate Calculator | Wealthy Toolkit">
+  <meta property="og:description" content="Estimate how much of your income you may need to save for retirement.">
+  <meta property="og:url" content="https://wealthytoolkit.com/savings-rate.html">
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <main class="container">
+    <a class="site-brand" href="index.html" aria-label="Wealthy Toolkit home"><span class="brand-mark" aria-hidden="true">WT</span><span><strong>Wealthy Toolkit</strong><small>Straightforward tools for understanding your money.</small></span></a>
     <nav class="tool-nav" aria-label="Retirement tools">
       <a href="index.html">Project my retirement</a>
-      <a class="active" href="savings-rate.html">Find my savings rate</a>
+      <a class="active" aria-current="page" href="savings-rate.html">Find my savings rate</a>
       <a href="how-it-works.html">How It Works / Advice</a>
       <a href="about.html">About</a>
     </nav>
 
-    <header>
+    <header id="main-content">
       <p class="eyebrow">SAVINGS RATE CALCULATOR</p>
       <h1>How much of your income should you save?</h1>
       <p class="subtitle">Calculate how much of your income you may need to save to support the life you want during retirement.</p>
@@ -64,13 +74,13 @@
 
       <section class="card chart-card">
         <h2>Portfolio Projection at the Calculated Rate</h2>
-        <div class="chart-wrap"><canvas id="savingsChart"></canvas></div>
+        <div class="chart-wrap"><canvas id="savingsChart" role="img" aria-label="Line chart showing projected portfolio balance at the calculated savings rate. The same values are available in the table below."></canvas></div>
       </section>
 
       <section class="card table-card">
         <h2>Year-by-Year Projection</h2>
         <div class="table-scroll">
-          <table>
+          <table><caption class="sr-only">Savings-rate projection by age</caption>
             <thead><tr><th>Age</th><th>Phase</th><th>Annual Salary</th><th>Saved</th><th>Total Balance</th></tr></thead>
             <tbody id="savingsProjectionTable"></tbody>
           </table>
@@ -81,6 +91,7 @@
 
       <p class="how-link">Want to know how the savings rate is calculated? <a href="how-it-works.html#savings-rate">See how it works →</a></p>
     </section>
+    <footer class="site-footer"><strong>Wealthy Toolkit</strong><span>Straightforward tools for understanding your money.</span><span>Questions or feedback: wealthytoolkit@gmail.com</span><span>© 2026 Wealthy Toolkit</span></footer>
   </main>
   <script src="savings-rate.js"></script>
 </body>

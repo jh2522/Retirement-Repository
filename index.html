@@ -3,19 +3,29 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Retirement Planner</title>
+  <title>Retirement Calculator | Wealthy Toolkit</title>
+  <meta name="description" content="Explore how saving, investment returns, inflation, spending, and retirement age could affect your retirement.">
+  <meta name="theme-color" content="#0b6f69">
+  <link rel="canonical" href="https://wealthytoolkit.com/">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="website"><meta property="og:site_name" content="Wealthy Toolkit">
+  <meta property="og:title" content="Retirement Calculator | Wealthy Toolkit">
+  <meta property="og:description" content="Explore how your savings, contributions, spending, and investing could shape your retirement.">
+  <meta property="og:url" content="https://wealthytoolkit.com/">
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <main class="container">
+    <a class="site-brand" href="index.html" aria-label="Wealthy Toolkit home"><span class="brand-mark" aria-hidden="true">WT</span><span><strong>Wealthy Toolkit</strong><small>Straightforward tools for understanding your money.</small></span></a>
     <nav class="tool-nav" aria-label="Retirement tools">
-      <a class="active" href="index.html">Project my retirement</a>
+      <a class="active" aria-current="page" href="index.html">Project my retirement</a>
       <a href="savings-rate.html">Find my savings rate</a>
       <a href="how-it-works.html">How It Works / Advice</a>
       <a href="about.html">About</a>
     </nav>
-    <header>
+    <header id="main-content">
       <p class="eyebrow">RETIREMENT PLANNER</p>
       <h1>Will your money last through retirement?</h1>
       <p class="subtitle">Explore how your savings, contributions, retirement spending, and investing could shape your retirement.</p>
@@ -92,13 +102,13 @@
 
       <section class="card chart-card">
         <h2>Portfolio Projection</h2>
-        <div class="chart-wrap"><canvas id="portfolioChart"></canvas></div>
+        <div class="chart-wrap"><canvas id="portfolioChart" role="img" aria-label="Line chart showing projected portfolio balance by age. The same values are available in the table below."></canvas></div>
       </section>
 
       <section class="card table-card">
         <h2>Year-by-Year Projection</h2>
         <div class="table-scroll">
-          <table>
+          <table><caption class="sr-only">Retirement projection by age</caption>
             <thead><tr><th>Age</th><th>Phase</th><th>Annual Salary</th><th>Saved</th><th>Total Balance</th></tr></thead>
             <tbody id="projectionTable"></tbody>
           </table>
@@ -111,6 +121,7 @@
 
       <p class="how-link">Curious how these numbers are calculated? <a href="how-it-works.html#retirement-projection">See how it works →</a></p>
     </section>
+    <footer class="site-footer"><strong>Wealthy Toolkit</strong><span>Straightforward tools for understanding your money.</span><span>Questions or feedback: wealthytoolkit@gmail.com</span><span>© 2026 Wealthy Toolkit</span></footer>
   </main>
   <script src="calculator.js"></script>
 </body>
