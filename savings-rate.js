@@ -92,13 +92,15 @@ function buildProjection(x, savingsRate) {
 
   for (let age = x.currentAge; age < x.retirementAge; age++) {
     const contribution = salary * savingsRate;
+    const endPortfolio = portfolio * (1 + x.workingReturn)
+                       + contribution * (1 + x.workingReturn / 2);
     rows.push({
       age: String(age), phase: "Working", salary, contribution,
       spending: null, passiveIncome: null, withdrawal: 0,
-      portfolio: Math.max(0, portfolio)
+      portfolio: Math.max(0, portfolio),
+      endPortfolio: Math.max(0, endPortfolio)
     });
-    portfolio = portfolio * (1 + x.workingReturn)
-              + contribution * (1 + x.workingReturn / 2);
+    portfolio = endPortfolio;
     salary *= (1 + x.salaryGrowth);
   }
 
@@ -111,12 +113,14 @@ function buildProjection(x, savingsRate) {
 
   for (let age = x.retirementAge; age < x.lifeExpectancy; age++) {
     const withdrawal = Math.max(0, spending - passiveIncome);
+    const endPortfolio = (portfolio - withdrawal) * (1 + x.retirementReturn);
     rows.push({
       age: String(age), phase: "Retirement", salary: null, contribution: 0,
       spending, passiveIncome, withdrawal,
-      portfolio: Math.max(0, portfolio)
+      portfolio: Math.max(0, portfolio),
+      endPortfolio: Math.max(0, endPortfolio)
     });
-    portfolio = (portfolio - withdrawal) * (1 + x.retirementReturn);
+    portfolio = endPortfolio;
     spending *= (1 + x.inflation);
     passiveIncome *= (1 + x.inflation);
   }
@@ -125,7 +129,7 @@ function buildProjection(x, savingsRate) {
   rows.push({
     age: String(x.lifeExpectancy), phase: "Plan end", salary: null,
     contribution: 0, spending: null, passiveIncome: null, withdrawal: 0,
-    portfolio: Math.max(0, endingBalance)
+    portfolio: Math.max(0, endingBalance), endPortfolio: Math.max(0, endingBalance)
   });
 
   return { rows, retirementBalance, endingBalance };
@@ -202,7 +206,6 @@ function render(solution, x) {
   const status = $("solverStatus");
 
   $("requiredRate").textContent = `${ratePercent.toFixed(2)}%`;
-  $("monthlySavings").textContent = money(x.startingSalary * solution.rate / 12);
   $("solverRetirementBalance").textContent = money(projection.retirementBalance);
   $("solverFirstYearSpending").textContent = money(
     x.retirementSpending * Math.pow(1 + x.inflation, x.retirementAge - x.currentAge)
@@ -244,7 +247,7 @@ function render(solution, x) {
       : "";
     const retirementLabels = rowClass ? `
     <tr class="retirement-labels">
-      <th>Age</th><th>Phase</th><th>Passive income</th><th>Spent each year</th><th>Starting portfolio</th>
+      <th>Age</th><th>Phase</th><th>Passive income</th><th>Spent during year</th><th>Starting portfolio</th><th>End-of-year portfolio</th>
     </tr>` : "";
     return `${retirementLabels}
     <tr class="${rowClass}">
@@ -253,6 +256,7 @@ function render(solution, x) {
       <td>${annualIncome == null ? "—" : money(annualIncome)}</td>
       <td>${savedOrSpent == null ? "—" : money(savedOrSpent)}</td>
       <td><strong>${money(row.portfolio)}</strong></td>
+      <td><strong>${money(row.endPortfolio)}</strong></td>
     </tr>
   `;
   }).join("");

@@ -65,28 +65,30 @@ function calculateRetirement(x) {
 
   for (let age = x.currentAge; age < x.retirementAge; age++) {
     const contribution = salary * x.savingsRate;
+    const endPortfolio = portfolio * (1 + x.workingReturn)
+                       + contribution * (1 + x.workingReturn / 2);
 
     rows.push({
       age, phase: "Working", salary, contribution,
       spending: null, passiveIncome: 0, withdrawal: 0,
-      portfolio: Math.max(0, portfolio)
+      portfolio: Math.max(0, portfolio),
+      endPortfolio: Math.max(0, endPortfolio)
     });
 
-    portfolio = portfolio * (1 + x.workingReturn)
-              + contribution * (1 + x.workingReturn / 2);
+    portfolio = endPortfolio;
     salary *= (1 + x.salaryGrowth);
   }
 
   for (let age = x.retirementAge; age <= x.lifeExpectancy; age++) {
     const withdrawal = Math.max(0, spending - passiveIncome);
+    const nextPortfolio = (portfolio - withdrawal) * (1 + x.retirementReturn);
 
     rows.push({
       age, phase: "Retirement", salary: null, contribution: 0,
       spending, passiveIncome, withdrawal,
-      portfolio: Math.max(0, portfolio)
+      portfolio: Math.max(0, portfolio),
+      endPortfolio: Math.max(0, nextPortfolio)
     });
-
-    const nextPortfolio = (portfolio - withdrawal) * (1 + x.retirementReturn);
     // Report the age during which the portfolio is depleted. Depletion
     // during the life expectancy year does not count as running out within
     // the user's lifetime.
@@ -136,7 +138,7 @@ function render(result, x) {
       : `Your projected portfolio reaches $0 before age ${x.lifeExpectancy}.`;
 
   $("headlineText").textContent =
-    `Based on a retirement age of ${x.retirementAge}, ${x.workingReturn * 100}% working-years return, ${x.retirementReturn * 100}% retirement return, and ${x.inflation * 100}% inflation.`;
+    `Saving ${x.savingsRate * 100}% of salary each year is projected to support ${money(x.retirementSpending)} in annual retirement spending (in today's dollars) beginning at age ${x.retirementAge}.`;
 
   const ctx = $("portfolioChart").getContext("2d");
   if (portfolioChart) portfolioChart.destroy();
@@ -205,7 +207,7 @@ function render(result, x) {
       interaction: { intersect: false, mode: "index" },
       plugins: {
         legend: { display: false },
-        tooltip: { callbacks: { label: item => `Starting balance: ${money(item.raw)}` } }
+        tooltip: { callbacks: { label: item => `Projected portfolio value: ${money(item.raw)}` } }
       },
       scales: {
         x: { title: { display: true, text: "Age" }, grid: { display: false } },
@@ -226,7 +228,7 @@ function render(result, x) {
       : "";
     const retirementLabels = rowClass ? `
     <tr class="retirement-labels">
-      <th>Age</th><th>Phase</th><th>Passive income</th><th>Spent each year</th><th>Starting portfolio</th>
+      <th>Age</th><th>Phase</th><th>Passive income</th><th>Spent during year</th><th>Starting portfolio</th><th>End-of-year portfolio</th>
     </tr>` : "";
     return `${retirementLabels}
     <tr class="${rowClass}">
@@ -235,6 +237,7 @@ function render(result, x) {
       <td>${annualIncome == null ? "—" : money(annualIncome)}</td>
       <td>${savedOrSpent == null ? "—" : money(savedOrSpent)}</td>
       <td><strong>${money(r.portfolio)}</strong></td>
+      <td><strong>${money(r.endPortfolio)}</strong></td>
     </tr>
   `;
   }).join("");

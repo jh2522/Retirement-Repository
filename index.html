@@ -15,23 +15,23 @@
   <meta name="description" content="Explore how saving, investment returns, inflation, spending, and retirement age could affect your retirement.">
   <meta name="theme-color" content="#0b6f69">
   <link rel="canonical" href="https://wealthytoolkit.com/">
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <meta property="og:type" content="website"><meta property="og:site_name" content="Wealthy Toolkit">
   <meta property="og:title" content="Retirement Calculator | Wealthy Toolkit">
   <meta property="og:description" content="Explore how your savings, contributions, spending, and investing could shape your retirement.">
   <meta property="og:url" content="https://wealthytoolkit.com/">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/style.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
   <main class="container">
-    <a class="site-brand" href="index.html" aria-label="Wealthy Toolkit home"><span class="brand-mark" aria-hidden="true">WT</span><span><strong>Wealthy Toolkit</strong><small>Straightforward tools for understanding your money.</small></span></a>
+    <a class="site-brand" href="/" aria-label="Wealthy Toolkit home"><span class="brand-mark" aria-hidden="true">WT</span><span><strong>Wealthy Toolkit</strong><small>Straightforward tools for understanding your money.</small></span></a>
     <nav class="tool-nav" aria-label="Retirement tools">
-      <a class="active" aria-current="page" href="index.html">Project my retirement</a>
-      <a href="savings-rate.html">Find my savings rate</a>
-      <a href="how-it-works.html">How It Works / Advice</a>
-      <a href="about.html">About</a>
+      <a class="active" aria-current="page" href="/">Project my retirement</a>
+      <a href="/savings-rate/">Find my savings rate</a>
+      <a href="/how-it-works/">How It Works / Advice</a>
+      <a href="/about/">About</a>
     </nav>
     <header id="main-content">
       <p class="eyebrow">RETIREMENT PLANNER</p>
@@ -44,9 +44,9 @@
       <div class="grid">
         <label>Current Age<input id="currentAge" type="number" min="18" max="100" value="25"></label>
         <label>Retirement Age<input id="retirementAge" type="number" min="19" max="100" value="65"></label>
-        <label>Life expectancy<input id="lifeExpectancy" type="number" min="20" max="120" value="100"></label>
-        <label class="unit-field money">Current Retirement Savings<input id="currentSavings" type="number" min="0" step="1000" value="50000"></label>
-        <label class="unit-field money">Current Annual Salary<input id="startingSalary" type="number" min="0" step="1000" value="100000"></label>
+        <label>Life expectancy<input id="lifeExpectancy" type="number" min="20" max="120" value="90"></label>
+        <label class="unit-field money">Current Retirement Savings<input id="currentSavings" type="number" min="0" step="1000" value="10000"></label>
+        <label class="unit-field money">Current Annual Salary<input id="startingSalary" type="number" min="0" step="1000" value="75000"></label>
         <label class="unit-field percent">Retirement Savings Rate<input id="savingsRate" type="number" min="0" max="100" step="0.5" value="15"></label>
       </div>
 
@@ -78,13 +78,13 @@
         </div>
         <div class="field">
           <div class="field-label"><label for="retirementSpending">Annual Retirement Spending</label><button class="info-button" type="button" aria-expanded="false" aria-controls="spendingTip" aria-label="About retirement spending">?</button></div>
-          <div class="input-shell money"><input id="retirementSpending" type="number" min="0" step="1000" value="75000"></div>
+          <div class="input-shell money"><input id="retirementSpending" type="number" min="0" step="1000" value="60000"></div>
           <small>How much you think you will spend each year in retirement, in today's dollars.</small>
           <div class="info-popover" id="spendingTip" hidden>Enter the amount you want to spend annually in today's purchasing power. Consider what lifestyle you want in retirement.</div>
         </div>
         <div class="field">
           <div class="field-label"><label for="passiveIncome">Annual Passive Income</label><button class="info-button" type="button" aria-expanded="false" aria-controls="passiveIncomeTip" aria-label="About passive income">?</button></div>
-          <div class="input-shell money"><input id="passiveIncome" type="number" min="0" step="1000" value="20000"></div>
+          <div class="input-shell money"><input id="passiveIncome" type="number" min="0" step="1000" value="0"></div>
           <small>Income such as Social Security, a pension, or investment-property income.</small>
           <div class="info-popover" id="passiveIncomeTip" hidden>This income reduces the amount that must be withdrawn from your retirement portfolio. It could include Social Security, pension payments, annuity income, or net income from investment properties. The entered amount begins in the first retirement year and then increases annually with inflation.</div>
         </div>
@@ -115,9 +115,10 @@
 
       <section class="card table-card">
         <h2>Year-by-Year Projection</h2>
+        <p class="table-explanation">The starting portfolio is the balance at the beginning of each age. Saving or spending during that year, along with investment growth, is reflected in the end-of-year portfolio and the next row.</p>
         <div class="table-scroll">
           <table><caption class="sr-only">Retirement projection by age</caption>
-            <thead><tr><th>Age</th><th>Phase</th><th>Annual Salary</th><th>Saved</th><th>Total Balance</th></tr></thead>
+            <thead><tr><th>Age</th><th>Phase</th><th>Annual Salary</th><th>Saved during year</th><th>Starting portfolio</th><th>End-of-year portfolio</th></tr></thead>
             <tbody id="projectionTable"></tbody>
           </table>
         </div>
@@ -127,10 +128,10 @@
         <strong>Important:</strong> This is an educational projection, not a guarantee or individualized financial advice. Investment returns vary from year to year, and actual retirement outcomes can differ substantially from any projection.
       </section>
 
-      <p class="how-link">Curious how these numbers are calculated? <a href="how-it-works.html#retirement-projection">See how it works →</a></p>
+      <p class="how-link">Curious how these numbers are calculated? <a href="/how-it-works/#retirement-projection">See how it works →</a></p>
     </section>
     <footer class="site-footer"><strong>Wealthy Toolkit</strong><span>Straightforward tools for understanding your money.</span><span>Questions or feedback: wealthytoolkit@gmail.com</span><span>© 2026 Wealthy Toolkit</span></footer>
   </main>
-  <script src="calculator.js"></script>
+  <script src="/calculator.js"></script>
 </body>
 </html>
