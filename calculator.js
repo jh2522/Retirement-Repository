@@ -71,8 +71,7 @@ function calculateRetirement(x) {
     rows.push({
       age, phase: "Working", salary, contribution,
       spending: null, passiveIncome: 0, withdrawal: 0,
-      portfolio: Math.max(0, portfolio),
-      endPortfolio: Math.max(0, endPortfolio)
+      portfolio: Math.max(0, portfolio)
     });
 
     portfolio = endPortfolio;
@@ -86,8 +85,7 @@ function calculateRetirement(x) {
     rows.push({
       age, phase: "Retirement", salary: null, contribution: 0,
       spending, passiveIncome, withdrawal,
-      portfolio: Math.max(0, portfolio),
-      endPortfolio: Math.max(0, nextPortfolio)
+      portfolio: Math.max(0, portfolio)
     });
     // Report the age during which the portfolio is depleted. Depletion
     // during the life expectancy year does not count as running out within
@@ -228,16 +226,15 @@ function render(result, x) {
       : "";
     const retirementLabels = rowClass ? `
     <tr class="retirement-labels">
-      <th>Age</th><th>Phase</th><th>Passive income</th><th>Spent during year</th><th>Starting portfolio</th><th>End-of-year portfolio</th>
+      <th>Age</th><th>Start-of-year portfolio</th><th>Phase</th><th>Passive income</th><th>Spent during year</th>
     </tr>` : "";
     return `${retirementLabels}
     <tr class="${rowClass}">
       <td>${r.age}</td>
+      <td><strong>${money(r.portfolio)}</strong></td>
       <td>${r.phase}</td>
       <td>${annualIncome == null ? "—" : money(annualIncome)}</td>
       <td>${savedOrSpent == null ? "—" : money(savedOrSpent)}</td>
-      <td><strong>${money(r.portfolio)}</strong></td>
-      <td><strong>${money(r.endPortfolio)}</strong></td>
     </tr>
   `;
   }).join("");

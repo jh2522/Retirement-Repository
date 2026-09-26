@@ -97,8 +97,7 @@ function buildProjection(x, savingsRate) {
     rows.push({
       age: String(age), phase: "Working", salary, contribution,
       spending: null, passiveIncome: null, withdrawal: 0,
-      portfolio: Math.max(0, portfolio),
-      endPortfolio: Math.max(0, endPortfolio)
+      portfolio: Math.max(0, portfolio)
     });
     portfolio = endPortfolio;
     salary *= (1 + x.salaryGrowth);
@@ -117,8 +116,7 @@ function buildProjection(x, savingsRate) {
     rows.push({
       age: String(age), phase: "Retirement", salary: null, contribution: 0,
       spending, passiveIncome, withdrawal,
-      portfolio: Math.max(0, portfolio),
-      endPortfolio: Math.max(0, endPortfolio)
+      portfolio: Math.max(0, portfolio)
     });
     portfolio = endPortfolio;
     spending *= (1 + x.inflation);
@@ -129,7 +127,7 @@ function buildProjection(x, savingsRate) {
   rows.push({
     age: String(x.lifeExpectancy), phase: "Plan end", salary: null,
     contribution: 0, spending: null, passiveIncome: null, withdrawal: 0,
-    portfolio: Math.max(0, endingBalance), endPortfolio: Math.max(0, endingBalance)
+    portfolio: Math.max(0, endingBalance)
   });
 
   return { rows, retirementBalance, endingBalance };
@@ -223,6 +221,14 @@ function render(solution, x) {
       : `${(earlierSolution.rate * 100).toFixed(2)}%`;
   }
 
+  const lowerWorkingReturnSolution = solveSavingsRate({
+    ...x,
+    workingReturn: x.workingReturn - 0.01
+  });
+  $("lowerWorkingReturnRate").textContent = lowerWorkingReturnSolution.status === "unattainable"
+    ? "More than 100%"
+    : `${(lowerWorkingReturnSolution.rate * 100).toFixed(2)}%`;
+
   status.hidden = true;
   status.className = "solver-status";
   if (solution.status === "alreadyFunded") {
@@ -247,16 +253,15 @@ function render(solution, x) {
       : "";
     const retirementLabels = rowClass ? `
     <tr class="retirement-labels">
-      <th>Age</th><th>Phase</th><th>Passive income</th><th>Spent during year</th><th>Starting portfolio</th><th>End-of-year portfolio</th>
+      <th>Age</th><th>Start-of-year portfolio</th><th>Phase</th><th>Passive income</th><th>Spent during year</th>
     </tr>` : "";
     return `${retirementLabels}
     <tr class="${rowClass}">
       <td>${row.age}</td>
+      <td><strong>${money(row.portfolio)}</strong></td>
       <td>${row.phase}</td>
       <td>${annualIncome == null ? "—" : money(annualIncome)}</td>
       <td>${savedOrSpent == null ? "—" : money(savedOrSpent)}</td>
-      <td><strong>${money(row.portfolio)}</strong></td>
-      <td><strong>${money(row.endPortfolio)}</strong></td>
     </tr>
   `;
   }).join("");
@@ -275,6 +280,23 @@ $("calculateRate").addEventListener("click", () => {
   }
   error.hidden = true;
   render(solveSavingsRate(x), x);
+});
+
+document.querySelectorAll(".info-button").forEach(button => {
+  button.addEventListener("click", event => {
+    event.stopPropagation();
+    const panel = document.getElementById(button.getAttribute("aria-controls"));
+    const willOpen = panel.hidden;
+    document.querySelectorAll(".info-popover").forEach(item => { item.hidden = true; });
+    document.querySelectorAll(".info-button").forEach(item => item.setAttribute("aria-expanded", "false"));
+    panel.hidden = !willOpen;
+    button.setAttribute("aria-expanded", String(willOpen));
+  });
+});
+
+document.addEventListener("click", () => {
+  document.querySelectorAll(".info-popover").forEach(item => { item.hidden = true; });
+  document.querySelectorAll(".info-button").forEach(item => item.setAttribute("aria-expanded", "false"));
 });
 
 $("calculateRate").click();
